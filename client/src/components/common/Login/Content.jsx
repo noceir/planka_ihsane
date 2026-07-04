@@ -7,7 +7,7 @@ import isEmail from 'validator/lib/isEmail';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Button, Divider, Form, Message, TextArea } from 'semantic-ui-react';
 import { useDidUpdate, usePrevious, useToggle } from '../../../lib/hooks';
@@ -200,88 +200,76 @@ const Content = React.memo(() => {
         <div className={styles.loginCard}>
           {/* Left panel: Login form */}
           <div className={styles.leftPanel}>
-            {/* Logo */}
-            <div className={styles.logoWrapper}>
-              <img src={ihsaneLogo} alt="Ihsane" className={styles.logo} />
-              <span className={styles.logoText}>FINGER</span>
-            </div>
+            <div className={styles.leftPanelContent}>
+              {/* Logo */}
+              <div className={styles.logoWrapper}>
+                <img src={ihsaneLogo} alt="Ihsane" className={styles.logo} />
+              </div>
 
-            {/* Greetings */}
-            <div className={styles.greetings}>
-              <h1 className={styles.title}>Holla,<br />Welcome Back</h1>
-              <p className={styles.subtitle}>Hey, welcome back to your special place</p>
-            </div>
-
-            {/* Error/Warning messages */}
-            {message && (
-              <Message
-                {...{
-                  [message.type]: true,
-                }}
-                visible
-                content={t(message.content)}
-                onDismiss={handleMessageDismiss}
-                className={styles.message}
-              />
-            )}
-
-            {/* Form */}
-            {!isOidcEnforced && (
-              <Form size="large" onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputWrapper}>
-                  <Input
-                    fluid
-                    ref={handleEmailOrUsernameFieldRef}
-                    name="emailOrUsername"
-                    value={data.emailOrUsername}
-                    placeholder="Username or email"
-                    maxLength={256}
-                    readOnly={isSubmitting}
-                    className={styles.input}
-                    onChange={handleFieldChange}
-                  />
-                </div>
-                <div className={styles.inputWrapper}>
-                  <Input.Password
-                    fluid
-                    ref={handlePasswordFieldRef}
-                    name="password"
-                    value={data.password}
-                    placeholder="Password"
-                    maxLength={256}
-                    readOnly={isSubmitting}
-                    className={styles.input}
-                    onChange={handleFieldChange}
-                  />
-                </div>
-                <div className={styles.extraWrapper}>
-                  <div className={styles.rememberMe}>
-                    <input type="checkbox" id="remember" defaultChecked />
-                    <label htmlFor="remember">Remember me</label>
-                  </div>
-                  <a href="#forgot" className={styles.forgotPassword} onClick={(e) => e.preventDefault()}>Forgot Password?</a>
-                </div>
-                <Form.Button
-                  fluid
-                  primary
-                  content="Sign In"
-                  loading={isSubmitting}
-                  disabled={isSubmitting || isSubmittingWithOidc}
-                  className={styles.submitButton}
+              {/* Error/Warning messages */}
+              {message && (
+                <Message
+                  {...{
+                    [message.type]: true,
+                  }}
+                  visible
+                  content={t(message.content)}
+                  onDismiss={handleMessageDismiss}
+                  className={styles.message}
                 />
-              </Form>
-            )}
+              )}
 
-            {/* Footer / Powered By */}
-            <div className={styles.poweredBy}>
-              <p className={styles.poweredByText}>
-                <Trans i18nKey="common.poweredByPlanka">
-                  {'Powered by '}
-                  <a href="https://github.com/plankanban/planka" target="_blank" rel="noreferrer">
-                    PLANKA
-                  </a>
-                </Trans>
-              </p>
+              {/* Form */}
+              <div className={styles.formContainer}>
+                {!isOidcEnforced && (
+                  <Form size="large" onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.inputWrapper}>
+                      <Input
+                        fluid
+                        ref={handleEmailOrUsernameFieldRef}
+                        name="emailOrUsername"
+                        value={data.emailOrUsername}
+                        placeholder="Username or email"
+                        maxLength={256}
+                        readOnly={isSubmitting}
+                        className={styles.input}
+                        onChange={handleFieldChange}
+                      />
+                    </div>
+                    <div className={styles.inputWrapper}>
+                      <Input.Password
+                        fluid
+                        ref={handlePasswordFieldRef}
+                        name="password"
+                        value={data.password}
+                        placeholder="Password"
+                        maxLength={256}
+                        readOnly={isSubmitting}
+                        className={styles.input}
+                        onChange={handleFieldChange}
+                      />
+                    </div>
+                    <div className={styles.extraWrapper}>
+                      <div className={styles.rememberMe}>
+                        <input type="checkbox" id="remember" defaultChecked />
+                        <label htmlFor="remember">Remember me</label>
+                      </div>
+                      <a href="#forgot" className={styles.forgotPassword} onClick={(e) => e.preventDefault()}>Forgot Password?</a>
+                    </div>
+                    <Form.Button
+                      fluid
+                      primary
+                      content="Sign In"
+                      loading={isSubmitting}
+                      disabled={isSubmitting || isSubmittingWithOidc}
+                      className={styles.submitButton}
+                    />
+                  </Form>
+                )}
+              </div>
+
+              {/* Spacer at the bottom to balance the logo wrapper */}
+              <div className={styles.footerSpacer} />
             </div>
           </div>
 
