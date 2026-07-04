@@ -1,0 +1,754 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  IHSANE DARK THEME — Custom Planka Dark Mode
+ *  A deep, modern dark theme with teal accents and
+ *  glassmorphism effects. Injected at build time.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ─── Google Font Import ─── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ═══════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — Central Color Palette
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* ── Base Dark Colors ── */
+  --ihsane-bg-deepest: #0a0a14;
+  --ihsane-bg-deep: #0f0f1a;
+  --ihsane-bg-base: #13132a;
+  --ihsane-bg-surface: #1a1a35;
+  --ihsane-bg-elevated: #222244;
+  --ihsane-bg-hover: #2a2a55;
+
+  /* ── Borders & Dividers ── */
+  --ihsane-border: rgba(100, 100, 180, 0.15);
+  --ihsane-border-subtle: rgba(100, 100, 180, 0.08);
+  --ihsane-border-strong: rgba(100, 100, 180, 0.25);
+
+  /* ── Text Colors ── */
+  --ihsane-text-primary: #e8e8f0;
+  --ihsane-text-secondary: #9999bb;
+  --ihsane-text-muted: #6666888;
+  --ihsane-text-inverse: #0f0f1a;
+
+  /* ── Accent — Teal/Cyan ── */
+  --ihsane-accent: #00d4aa;
+  --ihsane-accent-hover: #00e8bb;
+  --ihsane-accent-glow: rgba(0, 212, 170, 0.3);
+  --ihsane-accent-subtle: rgba(0, 212, 170, 0.1);
+
+  /* ── Semantic Colors ── */
+  --ihsane-danger: #ff6b6b;
+  --ihsane-warning: #ffd93d;
+  --ihsane-success: #00d4aa;
+  --ihsane-info: #5b8dee;
+
+  /* ── Glass Effect ── */
+  --ihsane-glass-bg: rgba(20, 20, 50, 0.7);
+  --ihsane-glass-border: rgba(100, 100, 180, 0.2);
+  --ihsane-glass-blur: 12px;
+
+  /* ── Shadows ── */
+  --ihsane-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --ihsane-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --ihsane-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --ihsane-shadow-glow: 0 0 20px var(--ihsane-accent-glow);
+
+  /* ── Transitions ── */
+  --ihsane-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ihsane-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ihsane-transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL RESETS & BASE STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+html, body {
+  background-color: var(--ihsane-bg-deepest) !important;
+  color: var(--ihsane-text-primary) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ihsane-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ihsane-bg-elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ihsane-bg-hover);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   APP ROOT — Main Background
+   ═══════════════════════════════════════════════════════════ */
+
+#app {
+  background: var(--ihsane-bg-deep) !important;
+  background-image:
+    radial-gradient(ellipse at 10% 20%, rgba(0, 212, 170, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(91, 141, 238, 0.03) 0%, transparent 50%) !important;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER / NAVIGATION BAR
+   ═══════════════════════════════════════════════════════════ */
+
+/* Main header bar */
+[class*="Header_wrapper"] {
+  background: var(--ihsane-bg-base) !important;
+  border-bottom: 1px solid var(--ihsane-border) !important;
+  backdrop-filter: blur(var(--ihsane-glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--ihsane-glass-blur)) !important;
+}
+
+/* Header icons and buttons */
+[class*="Header_"] button,
+[class*="Header_"] a {
+  color: var(--ihsane-text-secondary) !important;
+  transition: color var(--ihsane-transition-fast), transform var(--ihsane-transition-fast) !important;
+}
+
+[class*="Header_"] button:hover,
+[class*="Header_"] a:hover {
+  color: var(--ihsane-accent) !important;
+  transform: translateY(-1px);
+}
+
+/* Logo area — make it glow */
+[class*="Header_logo"],
+[class*="HeaderLogo"] {
+  filter: brightness(1.2) !important;
+  transition: filter var(--ihsane-transition-normal) !important;
+}
+
+[class*="Header_logo"]:hover,
+[class*="HeaderLogo"]:hover {
+  filter: brightness(1.5) drop-shadow(0 0 8px var(--ihsane-accent-glow)) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR / PROJECT LIST
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="Sidebar"],
+[class*="Projects_wrapper"] {
+  background: var(--ihsane-bg-base) !important;
+  border-right: 1px solid var(--ihsane-border) !important;
+}
+
+[class*="Sidebar"] a,
+[class*="Projects"] a {
+  color: var(--ihsane-text-secondary) !important;
+  transition: all var(--ihsane-transition-fast) !important;
+  border-radius: 8px !important;
+}
+
+[class*="Sidebar"] a:hover,
+[class*="Projects"] a:hover {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+  transform: translateX(4px);
+}
+
+[class*="Sidebar"] a[class*="active"],
+[class*="Projects"] a[class*="active"] {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+  border-left: 3px solid var(--ihsane-accent) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOARD VIEW — The main kanban area
+   ═══════════════════════════════════════════════════════════ */
+
+/* Board background */
+[class*="Board_wrapper"],
+[class*="Board_inner"] {
+  background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LISTS (Columns)
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="List_wrapper"],
+[class*="List_inner"] {
+  background: var(--ihsane-glass-bg) !important;
+  border: 1px solid var(--ihsane-glass-border) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(var(--ihsane-glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--ihsane-glass-blur)) !important;
+  box-shadow: var(--ihsane-shadow-md) !important;
+  transition: box-shadow var(--ihsane-transition-normal), transform var(--ihsane-transition-normal) !important;
+}
+
+[class*="List_wrapper"]:hover,
+[class*="List_inner"]:hover {
+  box-shadow: var(--ihsane-shadow-lg) !important;
+}
+
+/* List header / title */
+[class*="List_header"],
+[class*="List_headerTitle"] {
+  color: var(--ihsane-text-primary) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARDS — The kanban cards
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="Card_wrapper"],
+[class*="CardInner"] {
+  background: var(--ihsane-bg-surface) !important;
+  border: 1px solid var(--ihsane-border-subtle) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--ihsane-shadow-sm) !important;
+  transition:
+    transform var(--ihsane-transition-fast),
+    box-shadow var(--ihsane-transition-fast),
+    border-color var(--ihsane-transition-fast) !important;
+  cursor: pointer;
+}
+
+[class*="Card_wrapper"]:hover,
+[class*="CardInner"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--ihsane-shadow-md), 0 0 0 1px var(--ihsane-accent-glow) !important;
+  border-color: var(--ihsane-accent) !important;
+}
+
+[class*="Card_wrapper"]:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Card title */
+[class*="Card_name"],
+[class*="Card_title"] {
+  color: var(--ihsane-text-primary) !important;
+  font-weight: 500 !important;
+}
+
+/* Card description/details */
+[class*="Card_details"],
+[class*="Card_description"] {
+  color: var(--ihsane-text-secondary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LABELS (Color tags on cards)
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="Label_wrapper"] {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+  transition: transform var(--ihsane-transition-fast), filter var(--ihsane-transition-fast) !important;
+}
+
+[class*="Label_wrapper"]:hover {
+  transform: scale(1.05) !important;
+  filter: brightness(1.15) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODALS & DIALOGS
+   ═══════════════════════════════════════════════════════════ */
+
+.ui.modal,
+.ui.modal > .header,
+.ui.modal > .content,
+.ui.modal > .actions,
+[class*="Modal"],
+[class*="CardModal"],
+[class*="Popup"] {
+  background: var(--ihsane-bg-surface) !important;
+  color: var(--ihsane-text-primary) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--ihsane-shadow-lg), 0 0 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ui.modal > .header {
+  border-bottom: 1px solid var(--ihsane-border) !important;
+  font-weight: 600 !important;
+}
+
+.ui.modal > .actions {
+  border-top: 1px solid var(--ihsane-border) !important;
+}
+
+/* Dimmer (backdrop overlay) */
+.ui.dimmer {
+  background: rgba(5, 5, 15, 0.8) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Primary buttons — teal accent */
+.ui.primary.button,
+.ui.button.primary,
+button[class*="primary"],
+[class*="Button"][class*="primary"] {
+  background: linear-gradient(135deg, var(--ihsane-accent), #00b894) !important;
+  color: var(--ihsane-text-inverse) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 2px 8px var(--ihsane-accent-glow) !important;
+  transition: all var(--ihsane-transition-fast) !important;
+}
+
+.ui.primary.button:hover,
+.ui.button.primary:hover,
+button[class*="primary"]:hover {
+  background: linear-gradient(135deg, var(--ihsane-accent-hover), #00dfa2) !important;
+  box-shadow: 0 4px 16px var(--ihsane-accent-glow), var(--ihsane-shadow-glow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Secondary/default buttons */
+.ui.button,
+button[class*="Button"]:not([class*="primary"]):not([class*="danger"]) {
+  background: var(--ihsane-bg-elevated) !important;
+  color: var(--ihsane-text-secondary) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 8px !important;
+  transition: all var(--ihsane-transition-fast) !important;
+}
+
+.ui.button:hover,
+button[class*="Button"]:not([class*="primary"]):not([class*="danger"]):hover {
+  background: var(--ihsane-bg-hover) !important;
+  color: var(--ihsane-text-primary) !important;
+  border-color: var(--ihsane-border-strong) !important;
+}
+
+/* Negative / danger buttons */
+.ui.negative.button,
+.ui.button.negative,
+button[class*="danger"] {
+  background: linear-gradient(135deg, var(--ihsane-danger), #ee5a5a) !important;
+  border: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FORM INPUTS
+   ═══════════════════════════════════════════════════════════ */
+
+.ui.input input,
+.ui.input textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+.ui.form input,
+.ui.form textarea,
+.ui.selection.dropdown {
+  background: var(--ihsane-bg-base) !important;
+  color: var(--ihsane-text-primary) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 8px !important;
+  caret-color: var(--ihsane-accent) !important;
+  transition: border-color var(--ihsane-transition-fast), box-shadow var(--ihsane-transition-fast) !important;
+}
+
+.ui.input input:focus,
+.ui.input textarea:focus,
+input:focus,
+textarea:focus,
+.ui.form input:focus,
+.ui.form textarea:focus {
+  border-color: var(--ihsane-accent) !important;
+  box-shadow: 0 0 0 2px var(--ihsane-accent-glow), var(--ihsane-shadow-sm) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ihsane-text-muted) !important;
+  opacity: 0.6 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DROPDOWNS & MENUS
+   ═══════════════════════════════════════════════════════════ */
+
+.ui.dropdown .menu,
+.ui.selection.dropdown .menu,
+[class*="Dropdown_menu"],
+.ui.popup {
+  background: var(--ihsane-bg-elevated) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--ihsane-shadow-lg) !important;
+  backdrop-filter: blur(var(--ihsane-glass-blur)) !important;
+}
+
+.ui.dropdown .menu .item,
+.ui.selection.dropdown .menu .item,
+[class*="Dropdown_item"] {
+  color: var(--ihsane-text-secondary) !important;
+  transition: all var(--ihsane-transition-fast) !important;
+  border-radius: 6px !important;
+}
+
+.ui.dropdown .menu .item:hover,
+.ui.selection.dropdown .menu .item:hover,
+[class*="Dropdown_item"]:hover {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+}
+
+.ui.dropdown .menu .item.active,
+.ui.dropdown .menu .item.selected {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEMANTIC UI OVERRIDES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Segments */
+.ui.segment {
+  background: var(--ihsane-bg-surface) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--ihsane-shadow-sm) !important;
+}
+
+/* Messages */
+.ui.message {
+  background: var(--ihsane-bg-elevated) !important;
+  color: var(--ihsane-text-primary) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--ihsane-shadow-sm) !important;
+}
+
+/* Tabs / Menu */
+.ui.menu,
+.ui.secondary.menu {
+  background: transparent !important;
+  border: none !important;
+}
+
+.ui.menu .item,
+.ui.secondary.menu .item {
+  color: var(--ihsane-text-secondary) !important;
+  transition: all var(--ihsane-transition-fast) !important;
+}
+
+.ui.menu .item:hover,
+.ui.secondary.menu .item:hover {
+  color: var(--ihsane-accent) !important;
+}
+
+.ui.menu .active.item,
+.ui.secondary.menu .active.item {
+  color: var(--ihsane-accent) !important;
+  border-color: var(--ihsane-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Checkboxes */
+.ui.checkbox label {
+  color: var(--ihsane-text-secondary) !important;
+}
+
+/* Tables */
+.ui.table {
+  background: var(--ihsane-bg-surface) !important;
+  color: var(--ihsane-text-primary) !important;
+  border: 1px solid var(--ihsane-border) !important;
+}
+
+.ui.table thead th {
+  background: var(--ihsane-bg-elevated) !important;
+  color: var(--ihsane-text-secondary) !important;
+  border-bottom: 1px solid var(--ihsane-border) !important;
+}
+
+.ui.table tr {
+  border-bottom: 1px solid var(--ihsane-border-subtle) !important;
+}
+
+.ui.table tr:hover td {
+  background: var(--ihsane-bg-hover) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LOGIN PAGE
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="Login_wrapper"],
+[class*="Login_"] {
+  background: var(--ihsane-bg-deep) !important;
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(91, 141, 238, 0.08) 0%, transparent 50%) !important;
+}
+
+[class*="Login_form"],
+[class*="Login_box"] {
+  background: var(--ihsane-glass-bg) !important;
+  border: 1px solid var(--ihsane-glass-border) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: var(--ihsane-shadow-lg), 0 0 80px rgba(0, 212, 170, 0.05) !important;
+  padding: 40px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DATEPICKER OVERRIDES
+   ═══════════════════════════════════════════════════════════ */
+
+.react-datepicker {
+  background: var(--ihsane-bg-elevated) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 12px !important;
+  color: var(--ihsane-text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.react-datepicker__header {
+  background: var(--ihsane-bg-surface) !important;
+  border-bottom: 1px solid var(--ihsane-border) !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker__day-name {
+  color: var(--ihsane-text-secondary) !important;
+}
+
+.react-datepicker__day {
+  color: var(--ihsane-text-primary) !important;
+  border-color: var(--ihsane-border-subtle) !important;
+}
+
+.react-datepicker__day:hover {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+}
+
+.react-datepicker__day--selected {
+  background: var(--ihsane-accent) !important;
+  color: var(--ihsane-text-inverse) !important;
+}
+
+.react-datepicker__day--outside-month {
+  color: var(--ihsane-text-muted) !important;
+  opacity: 0.3 !important;
+}
+
+.react-datepicker__day-names {
+  background: var(--ihsane-bg-surface) !important;
+  border-color: var(--ihsane-border) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NOTIFICATION BADGES
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="Notification_badge"],
+[class*="badge"],
+.ui.label {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MARKDOWN / RICH TEXT CONTENT
+   ═══════════════════════════════════════════════════════════ */
+
+.yfm {
+  --yfm-color-text: var(--ihsane-text-primary) !important;
+  --yfm-color-accent: var(--ihsane-accent) !important;
+  --yfm-color-link: var(--ihsane-accent) !important;
+  --yfm-font-family-sans: 'Inter', sans-serif !important;
+  --yfm-font-family-monospace: 'JetBrains Mono', monospace !important;
+}
+
+.yfm code {
+  background: var(--ihsane-bg-elevated) !important;
+  color: var(--ihsane-accent) !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.yfm pre {
+  background: var(--ihsane-bg-base) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 10px !important;
+}
+
+.yfm blockquote {
+  border-left: 3px solid var(--ihsane-accent) !important;
+  background: var(--ihsane-accent-subtle) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 12px 16px !important;
+}
+
+.yfm a {
+  color: var(--ihsane-accent) !important;
+  text-decoration: none !important;
+  transition: color var(--ihsane-transition-fast) !important;
+}
+
+.yfm a:hover {
+  color: var(--ihsane-accent-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MENTIONS / SUGGESTIONS
+   ═══════════════════════════════════════════════════════════ */
+
+.mentions-input__suggestions {
+  background: var(--ihsane-bg-elevated) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--ihsane-shadow-lg) !important;
+}
+
+.mentions-input__suggestions__item {
+  color: var(--ihsane-text-secondary) !important;
+}
+
+.mentions-input__suggestions__item--focused {
+  background: var(--ihsane-accent-subtle) !important;
+  color: var(--ihsane-accent) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MICRO-ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Subtle fade-in for page transitions */
+@keyframes ihsane-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse glow for active elements */
+@keyframes ihsane-glow {
+  0%, 100% { box-shadow: 0 0 4px var(--ihsane-accent-glow); }
+  50% { box-shadow: 0 0 16px var(--ihsane-accent-glow); }
+}
+
+/* Apply fade-in to main content areas */
+[class*="Board_wrapper"],
+[class*="Projects_wrapper"],
+.ui.modal {
+  animation: ihsane-fadeIn var(--ihsane-transition-slow) ease-out !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   USER AVATARS
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="User_avatar"],
+[class*="Avatar"],
+.ui.avatar.image {
+  border: 2px solid var(--ihsane-border) !important;
+  transition: border-color var(--ihsane-transition-fast), transform var(--ihsane-transition-fast) !important;
+}
+
+[class*="User_avatar"]:hover,
+[class*="Avatar"]:hover,
+.ui.avatar.image:hover {
+  border-color: var(--ihsane-accent) !important;
+  transform: scale(1.1) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DUE DATE BADGES
+   ═══════════════════════════════════════════════════════════ */
+
+[class*="DueDate_wrapper"] {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: transform var(--ihsane-transition-fast) !important;
+}
+
+[class*="DueDate_wrapper"]:hover {
+  transform: scale(1.05) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LOADING STATES
+   ═══════════════════════════════════════════════════════════ */
+
+.ui.loader::after,
+.ui.loader::before {
+  border-color: var(--ihsane-accent) transparent transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MISC SEMANTIC UI DARK OVERRIDES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Icons */
+i.icon {
+  color: var(--ihsane-text-secondary);
+}
+
+/* Dividers */
+.ui.divider {
+  border-color: var(--ihsane-border) !important;
+}
+
+/* Toast notifications */
+.ui.toast-container .toast-box {
+  background: var(--ihsane-bg-elevated) !important;
+  border: 1px solid var(--ihsane-border) !important;
+  border-radius: 12px !important;
+  color: var(--ihsane-text-primary) !important;
+  box-shadow: var(--ihsane-shadow-lg) !important;
+}
+
+/* Selection highlighting */
+::selection {
+  background: var(--ihsane-accent) !important;
+  color: var(--ihsane-text-inverse) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT STYLES — Don't apply dark mode when printing
+   ═══════════════════════════════════════════════════════════ */
+
+@media print {
+  :root {
+    --ihsane-bg-deepest: #ffffff;
+    --ihsane-bg-deep: #ffffff;
+    --ihsane-bg-base: #ffffff;
+    --ihsane-bg-surface: #f8f8f8;
+    --ihsane-text-primary: #000000;
+    --ihsane-text-secondary: #444444;
+  }
+}
