@@ -39,6 +39,7 @@ function isBannerDismissed(userId) {
 }
 
 const PromoBanner = React.memo(() => {
+  return null;
   const userId = useSelector(selectors.selectCurrentUserId);
 
   const [dismissed, setDismissed] = useState(() => isBannerDismissed(userId));

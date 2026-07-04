@@ -11,7 +11,6 @@ import history from './history';
 import Root from './components/common/Root';
 
 import './i18n';
-import './ihsane-dark-theme.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(Root, { store, history }));

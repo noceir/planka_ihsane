@@ -16,7 +16,7 @@ export default {
   translation: {
     common: {
       aboutApp_title: 'About the App',
-      aboutPlanka_title: 'About PLANKA',
+      aboutPlanka_title: 'About Ihsane',
       accessToken: 'Access token',
       account: 'Account',
       actions: 'Actions',
@@ -269,7 +269,7 @@ export default {
       passwordIsSet: 'Password is set',
       phone: 'Phone',
       plankaUsesAppriseToSendNotificationsToOver100PopularServices:
-        'PLANKA uses <1><0>Apprise</0></1> to send notifications to over 100 popular services.',
+        'Ihsane uses <1><0>Apprise</0></1> to send notifications to over 100 popular services.',
       port: 'Port',
       preferences: 'Preferences',
       pressPasteShortcutToAddAttachmentFromClipboard:
