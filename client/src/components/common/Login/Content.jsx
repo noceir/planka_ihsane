@@ -20,8 +20,6 @@ import { isUsername } from '../../../utils/validator';
 import AccessTokenSteps from '../../../constants/AccessTokenSteps';
 import TermsModal from './TermsModal';
 
-import ihsaneLogo from '../../../assets/images/ihsane-logo.png';
-
 import styles from './Content.module.scss';
 
 const createMessage = (error, isDebug) => {
@@ -201,11 +199,6 @@ const Content = React.memo(() => {
           {/* Left panel: Login form */}
           <div className={styles.leftPanel}>
             <div className={styles.leftPanelContent}>
-              {/* Logo */}
-              <div className={styles.logoWrapper}>
-                <img src={ihsaneLogo} alt="Ihsane" className={styles.logo} />
-              </div>
-
               {/* Error/Warning messages */}
               {message && (
                 <Message

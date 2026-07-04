@@ -57,11 +57,9 @@
   .leftPanelContent {
     width: 100%;
     max-width: 360px;
-    height: 100%;
-    max-height: 520px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   /* ── Logo ── */
