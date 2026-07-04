@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation, Trans } from 'react-i18next';
 import TextareaAutosize from 'react-textarea-autosize';
-import { Button, Divider, Form, Header, Message, TextArea } from 'semantic-ui-react';
+import { Button, Divider, Form, Message, TextArea } from 'semantic-ui-react';
 import { useDidUpdate, usePrevious, useToggle } from '../../../lib/hooks';
 import { Input } from '../../../lib/custom-ui';
 
@@ -196,58 +196,45 @@ const Content = React.memo(() => {
 
   return (
     <div className={styles.wrapper}>
-      {/* Full-screen background image */}
-      <div className={styles.backgroundImage} />
-      <div className={styles.backgroundOverlay} />
-
-      {/* Centered login card */}
       <div className={styles.loginContainer}>
         <div className={styles.loginCard}>
-          {/* Logo */}
-          <div className={styles.logoWrapper}>
-            <img src={ihsaneLogo} alt="Ihsane" className={styles.logo} />
-          </div>
+          {/* Left panel: Login form */}
+          <div className={styles.leftPanel}>
+            {/* Logo */}
+            <div className={styles.logoWrapper}>
+              <img src={ihsaneLogo} alt="Ihsane" className={styles.logo} />
+              <span className={styles.logoText}>FINGER</span>
+            </div>
 
-          {/* Title */}
-          <Header
-            as="h1"
-            textAlign="center"
-            content={bootstrap.instanceName || 'Écoles Ihsane'}
-            className={styles.formTitle}
-          />
-          <Header
-            as="h2"
-            textAlign="center"
-            content={t('common.logIn', {
-              context: 'title',
-            })}
-            className={styles.formSubtitle}
-          />
+            {/* Greetings */}
+            <div className={styles.greetings}>
+              <h1 className={styles.title}>Holla,<br />Welcome Back</h1>
+              <p className={styles.subtitle}>Hey, welcome back to your special place</p>
+            </div>
 
-          {/* Error/Warning messages */}
-          {message && (
-            <Message
-              {...{
-                [message.type]: true,
-              }}
-              visible
-              content={t(message.content)}
-              onDismiss={handleMessageDismiss}
-              className={styles.message}
-            />
-          )}
+            {/* Error/Warning messages */}
+            {message && (
+              <Message
+                {...{
+                  [message.type]: true,
+                }}
+                visible
+                content={t(message.content)}
+                onDismiss={handleMessageDismiss}
+                className={styles.message}
+              />
+            )}
 
-          {/* Login form */}
-          {!isOidcEnforced && (
-            <>
+            {/* Form */}
+            {!isOidcEnforced && (
               <Form size="large" onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputWrapper}>
-                  <div className={styles.inputLabel}>{t('common.emailOrUsername')}</div>
                   <Input
                     fluid
                     ref={handleEmailOrUsernameFieldRef}
                     name="emailOrUsername"
                     value={data.emailOrUsername}
+                    placeholder="Username or email"
                     maxLength={256}
                     readOnly={isSubmitting}
                     className={styles.input}
@@ -255,71 +242,53 @@ const Content = React.memo(() => {
                   />
                 </div>
                 <div className={styles.inputWrapper}>
-                  <div className={styles.inputLabel}>{t('common.password')}</div>
                   <Input.Password
                     fluid
                     ref={handlePasswordFieldRef}
                     name="password"
                     value={data.password}
+                    placeholder="Password"
                     maxLength={256}
                     readOnly={isSubmitting}
                     className={styles.input}
                     onChange={handleFieldChange}
                   />
                 </div>
+                <div className={styles.extraWrapper}>
+                  <div className={styles.rememberMe}>
+                    <input type="checkbox" id="remember" defaultChecked />
+                    <label htmlFor="remember">Remember me</label>
+                  </div>
+                  <a href="#forgot" className={styles.forgotPassword} onClick={(e) => e.preventDefault()}>Forgot Password?</a>
+                </div>
                 <Form.Button
                   fluid
                   primary
-                  icon="right arrow"
-                  labelPosition="right"
-                  content={t('action.logIn')}
+                  content="Sign In"
                   loading={isSubmitting}
                   disabled={isSubmitting || isSubmittingWithOidc}
                   className={styles.submitButton}
                 />
               </Form>
-              {withOidc && (
-                <Divider horizontal content={t('common.or')} className={styles.divider} />
-              )}
-            </>
-          )}
+            )}
 
-          {/* OIDC / SSO */}
-          {withOidc && (
-            <>
-              <Button
-                fluid
-                primary={isOidcDebug ? undefined : isOidcEnforced}
-                color={isOidcDebug ? 'orange' : undefined}
-                icon={isOidcEnforced ? 'right arrow' : undefined}
-                labelPosition={isOidcEnforced ? 'right' : undefined}
-                content={isOidcDebug ? t('action.debugSso') : t('action.logInWithSso')}
-                loading={isSubmittingWithOidc}
-                disabled={isSubmitting || isSubmittingWithOidc}
-                onClick={handleAuthenticateWithOidcClick}
-              />
-              {debugLogs && (
-                <TextArea
-                  readOnly
-                  as={TextareaAutosize}
-                  value={debugLogs.join('\n')}
-                  className={styles.debugLog}
-                />
-              )}
-            </>
-          )}
-        </div>
+            {/* Footer / Powered By */}
+            <div className={styles.poweredBy}>
+              <p className={styles.poweredByText}>
+                <Trans i18nKey="common.poweredByPlanka">
+                  {'Powered by '}
+                  <a href="https://github.com/plankanban/planka" target="_blank" rel="noreferrer">
+                    PLANKA
+                  </a>
+                </Trans>
+              </p>
+            </div>
+          </div>
 
-        {/* Powered by footer */}
-        <div className={styles.poweredBy}>
-          <p className={styles.poweredByText}>
-            <Trans i18nKey="common.poweredByPlanka">
-              {'Powered by '}
-              <a href="https://github.com/plankanban/planka" target="_blank" rel="noreferrer">
-                PLANKA
-              </a>
-            </Trans>
-          </p>
+          {/* Right panel: Campus image */}
+          <div className={styles.rightPanel}>
+            <div className={styles.rightPanelImage} />
+          </div>
         </div>
       </div>
 
